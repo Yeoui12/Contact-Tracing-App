@@ -1,25 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const AdminHome: React.FC = () => {
 
 const [data, setData] = useState<any[]>([]);
 const [data2, setData2] = useState<any[]>([]);
 
-const [idNum, setidNum] = useState('');
-const [name, setName] = useState('');
-const [province, setProvince] = useState('');
-const [cityOrTown, setCityOrTown] = useState('');
-const [day, setDay] = useState('');
-const [time, setTime] = useState('');
-
 const [searchQuery, setSearchQuery] = useState('');
 
-
+const navigate = useNavigate();
 
 const [searchResults, setSearchResults] = useState<any[]>([]);
 
   useEffect(() => {
+    if (localStorage.getItem('isLoggedIn') !== 'true') {
+      navigate('/adminlogin');
+  }
     fetchUsers();
     fetchLogs();
   }, []);
@@ -52,10 +49,15 @@ const [searchResults, setSearchResults] = useState<any[]>([]);
     setSearchResults(results);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('isLoggedIn');
+    navigate('/adminlogin');
+  };
 
   return (
     <>
       <h2>Contact Tracing Admin</h2>
+      <button onClick={handleLogout}>Logout</button>
       <div>
         <h3>Search</h3>
         <form
