@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Navigate, useNavigate } from 'react-router-dom';
+import '../styles/adminstyles.css';
 
 const AdminHome: React.FC = () => {
 
@@ -55,9 +56,10 @@ const [searchResults, setSearchResults] = useState<any[]>([]);
   };
 
   return (
-    <>
+    <div>
       <h2>Contact Tracing Admin</h2>
       <button onClick={handleLogout}>Logout</button>
+
       <div>
         <h3>Search</h3>
         <form
@@ -66,8 +68,7 @@ const [searchResults, setSearchResults] = useState<any[]>([]);
             handleSearch();
           }}
         >
-          <div>
-            <label>Search:</label>
+          <div className='form-group'>
             <input
               type="text"
               name="search"
@@ -110,7 +111,7 @@ const [searchResults, setSearchResults] = useState<any[]>([]);
       </div>
 
       <div>
-        <h1>All Logs</h1>
+        <h1>Attendance Logs</h1>
         <table>
           <thead>
             <tr>
@@ -136,7 +137,7 @@ const [searchResults, setSearchResults] = useState<any[]>([]);
       </div>
 
       <div>
-        <h1>All Users</h1>
+        <h1>Registered Users</h1>
         <table>
           <thead>
             <tr>
@@ -160,7 +161,7 @@ const [searchResults, setSearchResults] = useState<any[]>([]);
           </tbody>
         </table>
       </div>
-    </>
+    </div>
   );
 };
 

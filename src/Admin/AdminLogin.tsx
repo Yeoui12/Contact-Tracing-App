@@ -21,6 +21,7 @@ function AdminLogin (){
             setCorrect('Successful! Redirecting to Dashboard...');
             setError(""); 
 
+            
             localStorage.setItem('isLoggedIn', 'true');
         } 
         else {
@@ -30,7 +31,10 @@ function AdminLogin (){
     };
     
     if (localStorage.getItem('isLoggedIn') === 'true') {
-        navigate("/admin");
+      
+        setTimeout(() => {
+            navigate("/admin");
+          }, 5000);
     }
 
     return (
