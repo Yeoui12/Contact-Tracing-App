@@ -5,7 +5,8 @@ import cpe from "../images/cpe.jpg";
 import id from "./images/id.jpg";
 import { FaRegIdCard } from "react-icons/fa";
 import { IoMdCloseCircle } from "react-icons/io";
-import { IoMail } from "react-icons/io5";
+import { FaCheckCircle } from "react-icons/fa";
+
 
 export const Attendance = (props: any) => {
   const [idNum, setidNum] = useState("");
@@ -14,6 +15,9 @@ export const Attendance = (props: any) => {
   const [showNone, setNone] = useState(false);
   const [result, setResult] = useState([]);
   const [resDisplay, setResDisplay] = useState(false);
+  const [resDisplay2, setResDisplay2] = useState(false);
+
+  const [text, setText] = useState("");
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -46,11 +50,22 @@ export const Attendance = (props: any) => {
       axios
       .post("http://localhost:4502/record.php", formData2)
       .then((response) => {
-        setResult(response.data);
-        console.log(response.data);
-        setResDisplay(true);
+        if(response.data[0] == "1"){
+          setText("Time in recorded");
+          setResDisplay(true);
+        }
+        else if(response.data[0] == "2"){
+          setText("Time out recorded");
+          setResDisplay(true);
+        }
+        else if(response.data[0] == "3"){
+          setText("Already logged for today");
+          setResDisplay2(true);
+        }
+        
         setTimeout(() => {
           setResDisplay(false);
+          setResDisplay2(false);
         }, 5000);
       })
       .catch((error) => {
@@ -103,26 +118,102 @@ export const Attendance = (props: any) => {
 
       {showVerify && (
         <div className="popup">
-        <div className="popupheader">
-        <h2>Confirm Details</h2>
+        <div className="popup-header"><h2>Confirm Details</h2></div>
+
+        <div className="content-container">
+        <div className="content-column">
+
+          <div className="line-content">
+            <div className="content-row-left">
+              <p><b>ID NUMBER</b></p>
+            </div>
+            <div className="content-row-right">
+              <p>:&nbsp;{data[7]}</p>
+            </div>
+          </div>
+          <div className="line-content">
+            <div className="content-row-left">
+              <p><b>NAME</b></p>
+            </div>
+            <div className="content-row-right">
+              <p>:&nbsp;{data[0]}</p>
+            </div>
+          </div>
+          <div className="line-content">
+            <div className="content-row-left">
+              <p><b>ADDRESS</b></p>
+            </div>
+            <div className="content-row-right">
+              <p>:&nbsp;{data[1]}</p>
+            </div>
+          </div>
+          <div className="line-content">
+            <div className="content-row-left">
+              <p><b>CONTACT NUMBER</b></p>
+            </div>
+            <div className="content-row-right">
+              <p>:&nbsp;{data[2]}</p>
+            </div>
+          </div>
+          <div className="line-content">
+            <div className="content-row-left">
+              <p><b>E-MAIL</b></p>
+            </div>
+            <div className="content-row-right">
+              <p>:&nbsp;{data[3]}</p>
+            </div>
+          </div>
+          <div className="line-content">
+            <div className="content-row-left">
+              <p><b>LAST LOGGED DATE</b></p>
+            </div>
+            <div className="content-row-right">
+              <p>:&nbsp;{data[4]}</p>
+            </div>
+          </div>
+          <div className="line-content">
+            <div className="content-row-left">
+              <p><b>TIME IN</b></p>
+            </div>
+            <div className="content-row-right">
+              <p>:&nbsp;{data[5]}</p>
+            </div>
+          </div>
+          <div className="line-content">
+            <div className="content-row-left">
+              <p><b>TIME OUT</b></p>
+            </div>
+            <div className="content-row-right">
+              <p>:&nbsp;{data[6]}</p>
+            </div>
+          </div>
+
         </div>
-        <div className="line3"></div>
-        <p><b>ID NUMBER&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b> {data[7]}</p>
-        <p><b>NAME&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b> {data[0]}</p>
-        <p><b>ADDRESS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b> {data[1]}</p>
-        <p><b>CONTACT NUMBER&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b> {data[2]}</p>
-        <p><b>E-MAIL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b> {data[3]}</p>
-        <button className="cancelbt" onClick={() => setVerify(false)}>Cancel</button>
-        <button className="proceedbt" onClick={handleVerification}>Proceed</button>
+        </div>
+
+        <div className="button-container">
+          <button className="cancelbt" onClick={() => setVerify(false)}>Cancel</button>
+          <button className="proceedbt" onClick={handleVerification}>Log Today</button>
+        </div>
       </div>
       )}
 
 {resDisplay && (
       <div className="result-popup">
-        <p><IoMail color="#802cec" size="2em"/></p>
-        <div className="result-text">
-        <p><b>|</b>&nbsp;&nbsp;&nbsp;{result}</p>
+        <div className="result-content">
+        <div className="icon"><FaCheckCircle color="rgb(23, 213, 23)" size="1.7em"/></div>
+        <p>{text}</p>
         </div>
+
+      </div> 
+      )}
+      {resDisplay2 && (
+      <div className="result-popup2">
+        <div className="result-content">
+        <div className="icon"><IoMdCloseCircle color="red" size="1.7em"/></div>
+        <p>{text}</p>
+        </div>
+
       </div> 
       )}
 
