@@ -1,0 +1,150 @@
+.admin-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    padding: 50px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  .header-row {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    width: 100%; 
+    margin: 0; 
+    margin-bottom: 1%;
+}
+
+.centered-header {
+    font-size: 24px;
+    margin-bottom: 20px; 
+}
+  
+  .logout-btn {
+    background-color: #802cec;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: block;
+    font-size: 16px;
+    height: 40px;
+    width: 10%;
+    border-radius: 5px;
+    margin-top: 0.5%;
+    margin-left: 2%;
+  }
+  
+  .search-section {
+    margin-bottom: 20px;
+  }
+  
+  .search-section h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .admin-form-group {
+    align-items: center;
+    /*margin: 0 auto 10px;*/
+    display: flex;
+    justify-content: center; /* Center align items horizontally */
+  }
+  
+  .admin-form-group input[type="text"] {
+    width: 200px;
+    box-sizing: border-box;
+    border: 1px solid #d1d8e0;
+    border-radius: 5px;
+    padding: 7px;
+    width: calc(35% - 5px); /* Adjusted width of text box */
+  }
+
+  button:hover {
+    cursor: pointer;
+    background-color: #7126d3;
+  }
+  
+  .search-btn {
+    position: relative;
+    left: -3px; /* Adjusted position to align with the text box */
+    background-color: #802cec;
+    color: #fff;
+    border: none;
+    padding: 6.8px 10px;
+    cursor: pointer;
+    font-size: 15px;
+    border-radius: 0 5px 5px 0;
+}
+  
+  .search-results,
+  .attendance-logs,
+  .registered-users {
+    margin-bottom: 40px;
+    text-align: center;
+    max-width: 100%;
+    margin: 0 auto;
+    overflow-x: auto;
+  }
+  
+  table {
+    font-family: 'Roboto', sans-serif;
+    border-collapse: collapse;
+    width: 790px;
+    margin: 0 auto;
+    border-radius: 20px;
+  }
+  
+  th {
+    font-weight: bold;
+    text-align: left;
+    padding: 15px;
+    background-color: #55608f;
+    color: #fff;
+  }
+
+  tbody {
+    text-align: left;
+  }
+  
+  td {
+    padding: 15px;
+    color: black;
+  }
+  
+  tr:nth-child(even) {
+    background-color: rgb(235, 229, 229);  
+  }
+  
+  tr:nth-child(odd) {
+    background-color: white;  
+  }
+
+  tr:hover {
+    background-color: #ddd;
+  }
+
+  /* CSS for Scrollbar*/
+  .table-container::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  .table-container::-webkit-scrollbar-track {
+    background: transparent; 
+  }
+  
+  /* Handle */
+  .table-container::-webkit-scrollbar-thumb {
+    background: #fff; 
+    border-radius: 20px;
+  }
+  
+  /* Handle on hover */
+  .table-container::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+  

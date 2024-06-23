@@ -4,20 +4,16 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import '../styles/adminstyles.css';
 
 const AdminHome: React.FC = () => {
-
-const [data, setData] = useState<any[]>([]);
-const [data2, setData2] = useState<any[]>([]);
-
-const [searchQuery, setSearchQuery] = useState('');
-
-const navigate = useNavigate();
-
-const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [data, setData] = useState<any[]>([]);
+  const [data2, setData2] = useState<any[]>([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
+  const [searchResults, setSearchResults] = useState<any[]>([]);
 
   useEffect(() => {
     if (localStorage.getItem('isLoggedIn') !== 'true') {
       navigate('/adminlogin');
-  }
+    }
     fetchUsers();
     fetchLogs();
   }, []);
@@ -56,34 +52,31 @@ const [searchResults, setSearchResults] = useState<any[]>([]);
   };
 
   return (
-    <div>
-      <h2>Contact Tracing Admin</h2>
-      <button onClick={handleLogout}>Logout</button>
+    <div className="admin-container">
+      
+      <div className='header-row'>
+      <h2 className="centered-header">Contact Tracing Admin</h2>
+      <button className="logout-btn" onClick={handleLogout}>Logout</button>
+      </div>
 
-      <div>
-        <h3>Search</h3>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSearch();
-          }}
-        >
-          <div className='form-group'>
+      <div className="search-section">
+        <form onSubmit={(e) => { e.preventDefault(); handleSearch(); }}>
+          <div className="admin-form-group">
             <input
               type="text"
               name="search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
+            <button type="submit" className="search-btn">Search</button>
           </div>
-          <button type="submit">Search</button>
         </form>
       </div>
 
-      <div>
-        {searchResults.length >0 && (
+      <div className="search-results">
+        {searchResults.length > 0 && (
           <div>
-            <h1>Search Results</h1>
+            <h1 className="centered-header">Search Results</h1>
             <table>
               <thead>
                 <tr>
@@ -95,8 +88,8 @@ const [searchResults, setSearchResults] = useState<any[]>([]);
                 </tr>
               </thead>
               <tbody>
-                {searchResults.map((item: any) => (
-                  <tr>
+                {searchResults.map((item: any, index: number) => (
+                  <tr key={index}>
                     <td>{item.idNum}</td>
                     <td>{item.fullName}</td>
                     <td>{item.day}</td>
@@ -110,8 +103,8 @@ const [searchResults, setSearchResults] = useState<any[]>([]);
         )}
       </div>
 
-      <div>
-        <h1>Attendance Logs</h1>
+      <div className="attendance-logs">
+        <h1 className="centered-header">Attendance Logs</h1>
         <table>
           <thead>
             <tr>
@@ -123,8 +116,8 @@ const [searchResults, setSearchResults] = useState<any[]>([]);
             </tr>
           </thead>
           <tbody>
-            {data2.map((item: any) => (
-              <tr>
+            {data2.map((item: any, index: number) => (
+              <tr key={index}>
                 <td>{item.idNum}</td>
                 <td>{item.fullName}</td>
                 <td>{item.day}</td>
@@ -136,8 +129,8 @@ const [searchResults, setSearchResults] = useState<any[]>([]);
         </table>
       </div>
 
-      <div>
-        <h1>Registered Users</h1>
+      <div className="registered-users">
+        <h1 className="centered-header">Registered Users</h1>
         <table>
           <thead>
             <tr>
@@ -149,8 +142,8 @@ const [searchResults, setSearchResults] = useState<any[]>([]);
             </tr>
           </thead>
           <tbody>
-            {data.map((item: any) => (
-              <tr>
+            {data.map((item: any, index: number) => (
+              <tr key={index}>
                 <td>{item.idNum}</td>
                 <td>{item.fullName}</td>
                 <td>{item.address}</td>

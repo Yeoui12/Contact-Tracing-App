@@ -91,6 +91,12 @@
     cursor: pointer;
 }
 
+.changebt:hover {
+  background: none;
+  color: #280f49;
+}
+
+
 .changebtp {
     color: #000;
     margin-left: 25%;
